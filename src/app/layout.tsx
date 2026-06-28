@@ -5,7 +5,7 @@ import { Toaster } from "@/components/ui/sonner";
 // @ts-ignore
 import './globals.css';
 import { ClerkProvider } from "@clerk/nextjs";
-
+import { TRPCReactProvider } from "@/trpc/client";
 const inter = Inter({
   variable: "--font-inter",
   subsets: ["latin"],
@@ -18,8 +18,8 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: {
-    default: "Resonance",
-    template: "%s | Resonance"
+    default: "Auris",
+    template: "%s | Auris"
   },
   description: "AI-powered text-to-speech and voice cloning platform",
 };
@@ -33,6 +33,8 @@ export default function RootLayout({
 }>) {
   return (
     <ClerkProvider>
+      <TRPCReactProvider>
+
     <html lang="en">
       <body
         className={`${inter.variable} ${geistMono.variable} antialiased`}
@@ -41,6 +43,7 @@ export default function RootLayout({
         <Toaster />
       </body>
     </html>
+          </TRPCReactProvider>
     </ClerkProvider>
   );
 }

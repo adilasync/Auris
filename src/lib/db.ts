@@ -1,10 +1,16 @@
-import { z } from "zod";
-import { createEnv } from "@t3-oss/env-nextjs";
+import { PrismaClient } from "@/generated/prisma/client";
+import { PrismaPg } from "@prisma/adapter-pg";
 
-export const env = createEnv({
-  server: {
-    DATABASE_URL: z.string().min(1),
-  },
-  experimental__runtimeEnv: {},
-  skipValidation: !!process.env.SKIP_ENV_VALIDATION,
+import { env } from "./env";
+
+const adapter = new PrismaPg({
+  connectionString: env.DATABASE_URL,
 });
+
+const globalForPrisma = global as unknown as { prisma: PrismaClient };
+
+const prisma = globalForPrisma.prisma || new PrismaClient({ adapter });
+
+if (process.env.NODE_ENV !== "production") globalForPrisma.prisma = prisma;
+
+export { prisma };
