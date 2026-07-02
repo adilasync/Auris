@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter, Geist_Mono } from "next/font/google";
 import { Toaster } from "@/components/ui/sonner";
+import { NuqsAdapter } from "nuqs/adapters/next/app";
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 // @ts-ignore
 import './globals.css';
@@ -39,7 +40,9 @@ export default function RootLayout({
       <body
         className={`${inter.variable} ${geistMono.variable} antialiased`}
         >
-        {children}
+        <NuqsAdapter>
+              {children}
+            </NuqsAdapter>
         <Toaster />
       </body>
     </html>

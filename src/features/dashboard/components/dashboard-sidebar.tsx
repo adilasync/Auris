@@ -1,4 +1,5 @@
-"use client"
+"use client";
+
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 
@@ -32,7 +33,6 @@ import {
   Headphones,
 } from "lucide-react";
 import Link from "next/link";
-import { useState } from "react";
 
 interface MenuItem {
   title: string;
@@ -92,10 +92,9 @@ function NavSection({ label, items, pathname }: NavSectionProps) {
   );
 }
 
-export function DashboardSidebar(){
-const pathname = usePathname();
+export function DashboardSidebar() {
+  const pathname = usePathname();
   const clerk = useClerk();
-  const [voiceDialogOpen, setVoiceDialogOpen] = useState(false);
 
   const mainMenuItems: MenuItem[] = [
     {
@@ -113,11 +112,10 @@ const pathname = usePathname();
       url: "/text-to-speech",
       icon: AudioLines,
     },
-    {
-      title: "Voice cloning",
-      icon: Volume2,
-      onClick: () => setVoiceDialogOpen(true),
-    },
+    // {
+    //   title: "Voice cloning",
+    //   icon: Volume2,
+    // },
   ];
 
   const othersMenuItems: MenuItem[] = [
@@ -128,33 +126,32 @@ const pathname = usePathname();
     },
     {
       title: "Help and support",
-      url: "mailto:adilsk162017@gmail.com",
+      url: "mailto:business@codewithantonio.com",
       icon: Headphones,
     },
   ];
 
-  return(
-
+  return (
     <Sidebar collapsible="icon">
-        <SidebarHeader className="flex flex-col gap-4 pt-4">
-            <div className="flex items-center gap-2 pl-1 group-data-[collapsible=icon]:justify-center group-data-[collapsible=icon]:pl-0">
-                 <Image
+      <SidebarHeader className="flex flex-col gap-4 pt-4">
+        <div 
+        className="flex items-center gap-2 pl-1 group-data-[collapsible=icon]:justify-center group-data-[collapsible=icon]:pl-0">
+          <Image
             src="/logo.svg"
             alt="Resonance"
             width={24}
             height={24}
             className="rounded-sm"
           />
-           <span className="group-data-[collapsible=icon]:hidden font-semibold text-lg tracking-tighter text-foreground">
-            Auris
+          <span className="group-data-[collapsible=icon]:hidden font-semibold text-lg tracking-tighter text-foreground">
+            Resonance
           </span>
           <SidebarTrigger className="ml-auto lg:hidden" />
-            </div>
-            <SidebarMenu>
-                <SidebarMenuItem>
-
-                <OrganizationSwitcher 
-                     hidePersonal
+        </div>
+        <SidebarMenu>
+          <SidebarMenuItem>
+            <OrganizationSwitcher
+              hidePersonal
               fallback={
                 <Skeleton
                   className="h-8.5 w-full group-data-[collapsible=icon]:size-8 rounded-md border bg-white"
@@ -176,10 +173,10 @@ const pathname = usePathname();
                 },
               }}
             />
-            </SidebarMenuItem>
-            </SidebarMenu>
-        </SidebarHeader>
-         <div className="border-b border-dashed border-border" />
+          </SidebarMenuItem>
+        </SidebarMenu>
+      </SidebarHeader>
+      <div className="border-b border-dashed border-border" />
       <SidebarContent>
         <NavSection items={mainMenuItems} pathname={pathname} />
         <NavSection
@@ -189,7 +186,7 @@ const pathname = usePathname();
         />
       </SidebarContent>
       <div className="border-b border-dashed border-border" />
-       <SidebarFooter className="gap-3 py-3">
+      <SidebarFooter className="gap-3 py-3">
         <SidebarMenu>
           <SidebarMenuItem>
             <UserButton
@@ -212,11 +209,7 @@ const pathname = usePathname();
           </SidebarMenuItem>
         </SidebarMenu>
       </SidebarFooter>
-       <SidebarRail />
+      <SidebarRail />
     </Sidebar>
-  )
-
-
+  );
 }
-
-
